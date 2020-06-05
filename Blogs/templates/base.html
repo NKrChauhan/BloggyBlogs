@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Blog</title>
+  <link rel="icon" href="https://t4.ftcdn.net/jpg/01/92/97/43/500_F_192974309_VWlkTxNOTWIMiE9wl3of8q9rK2ZT5P0R.jpg" type="icon"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block head %}
+  {% endblock %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+  <!--font family-->
+   <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+   <!-- <link rel="stylesheet" href="{% static 'blog/base.css' %}" type="text/css"> -->
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-collapse container-fluid navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">BloggyBlogs</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'post_list' %}">Home</a></li>
+      <li class="dropdown"><a href="{% url 'about' %}">About <span></span></a>
+      </li>
+      <li><a href="{% url 'admin:index' %}">Admin</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+      <li><a class="nav-link" href="{% url 'post_create' pk=user.id  %}">Post New</a></li>
+      <li><a class="nav-link" href="{% url 'draft_list' %}">Draft List</a></li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Welcome :{{user.username}}</a></li>
+      <li><a class="nav-link" href="{% url 'logout' %}?next=/list"><span class="glyphicon glyphicon-log-in"> LogOut</span></a></li>
+      {% else %}
+      <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+{% block content %}
+
+{% endblock %}
+<style>
+  body{
+    margin-top: 5%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #212121;
+    background-blend-mode: overlay;
+  }
+</style>
+</body>
+</html>
+

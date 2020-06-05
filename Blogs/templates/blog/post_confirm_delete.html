@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" class="container jumbotron">
+    <h2>Are you sure you want to delete the Post</h1>
+    <button type="submit" class="btn btn-danger" value="confirm">delete Post</button>
+      {% csrf_token %}
+</form>
+<style>
+  body{
+    background-image: url("https://cdn.hipwallpaper.com/i/49/60/5sY7Nz.jpg");
+  }
+</style>
+{% endblock %}

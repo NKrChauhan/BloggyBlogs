@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="post container jumbotron">
+    <h1>{{ post.title }}</h1>
+    <h2>Author is :{{ post.author }}</h2>
+  {% if user.is_authenticated %}
+  <br>
+    <a class="btn btn-primary" href="{% url 'post_update' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn btn-primary" href="{% url 'post_delete' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+  {% endif %}
+  {% if post.publish_date %}
+      <h3>Published on: {{ post.publish_date }}</h3>
+      <p>{{ post.text|safe|linebreaksbr }}</p>
+    </div>
+    <h2 class="container" style="color:white;"> Comments :</h2>
+    <div class="comment container jumbotron">
+    {% for comment in post.comments.all %}
+      {% if user.is_authenticated or comment.approved %}
+        {% if not comment.approved and user.is_authenticated  %}
+          <a class="btn btn-primary" href="{% url 'approve_comment' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+          <a class="btn btn-primary" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        {% endif %}
+        <h2>{{comment.text|safe|linebreaks}}</h2>
+        <h4 style="color:yellowgreen">posted by: {{comment.author}}</h4>
+        {{ comment.created_date }}
+      {% else %}
+        <p style="color:white;">No Comments</p>
+      {% endif %}
+    <hr>
+    {% endfor %}
+    </div>
+  {% else %}
+  <br><br><br>
+    <a class='btn btn-primary' href="{% url 'publish_post' pk=post.pk %}">Publish The Article !</a>
+  {% endif %}
+  <br><hr>
+  {% if not user.is_anonymous %}
+  <div class="container">
+    <a class="btn btn-primary" href="{% url 'add_comment' pk=post.pk %}">Add Comment</a>
+  </div>
+  <style>
+    body{
+      background-image: url("https://cdn.hipwallpaper.com/i/49/60/5sY7Nz.jpg");
+    }
+  </style>
+  {% endif %}
+  {% endblock %}

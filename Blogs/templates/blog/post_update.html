@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" class="post container jumbotron">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary" value="Save">UPDATE</button>
+</form>
+<style media="screen">
+.post{
+margin-left: 200px;
+}
+body{
+  background-image: url("https://cdn.hipwallpaper.com/i/49/60/5sY7Nz.jpg");
+}
+</style>
+<script type="text/javascript">
+  var editor= new MediumEditor('.editable');
+</script>
+{% endblock %}

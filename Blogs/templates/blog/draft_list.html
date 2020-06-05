@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="Container">
+{% for post in object_list %}
+<div class="post jumbotron container centerstage">
+  <p class="date">created date: {{post.create_date|date:'d-m-Y'}}</p>
+  <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+  <p>{{post.text|truncatechars:200}}</p>
+</div>
+{% endfor %}
+</div>
+<style>
+  body{
+    background-image: url("https://cdn.hipwallpaper.com/i/49/60/5sY7Nz.jpg");
+  }
+</style>
+{% endblock %}

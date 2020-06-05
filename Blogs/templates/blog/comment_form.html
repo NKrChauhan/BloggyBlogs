@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<form class="form-horizontal jumbotron container" method="POST">
+<h2>Comment on the post : {{post.title}}</h2>
+<div class="form-group">
+      {% csrf_token %}
+      {{form.as_p}}
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Add Comment</button>
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript">
+    var editor= new MediumEditor('.editable');
+  </script>
+  <style>
+    body{
+      background-image: url("https://cdn.hipwallpaper.com/i/49/60/5sY7Nz.jpg");
+    }
+  </style>
+{% endblock %}
